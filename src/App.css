@@ -1,6 +1,6 @@
 
 .stats {
-  width: 300px;
+  width: 400px;
 }
 
 .stat-wrap {
@@ -10,10 +10,13 @@
 }
 
 .stat-number {
-  width: 50px;
   font-family: KimDaeGeon;
 }
 
 .bonus {
   color: limegreen;
+}
+
+.red {
+  color: red;
 }
