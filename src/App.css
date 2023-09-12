@@ -1,11 +1,19 @@
+
+.stats {
+  width: 300px;
+}
+
 .stat-wrap {
   display: flex;
   justify-content: space-between;
-  width: 300px;
   margin-bottom: 10px;
 }
 
 .stat-number {
   width: 50px;
   font-family: KimDaeGeon;
+}
+
+.bonus {
+  color: limegreen;
 }

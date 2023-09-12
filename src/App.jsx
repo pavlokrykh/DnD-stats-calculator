@@ -4,50 +4,68 @@ import './App.css';
 function App() {
   const [str, setStr] = useState(15);
   const [hp, setHp] = useState(100);
-
-
-  function valueCheck(value) {
-    if (value <= 100) return true;
-    else {
-      alert('The stat should be less than 100!');
-      return false;
-    }
-  }
-
+  const [power, setPower] = useState(0);
+  let hpScale = {0:3, 10:-1, 50:-1, 75:-0.5};
+  let powerScale = {0:10, 5:-5, 7:-2, 11:-1, 15:-1, 50:-0.5};
 
 
   function strChange(value) {
-    let prevValue = str;
     setStr(value);
-    if (valueCheck(value)) {
-      if (value > prevValue) {
-        if (value <= 10)       setHp(hp => hp+3);
-        else if (value <= 50)  setHp(hp => hp+2);
-        else if (value <= 75)  setHp(hp => hp+1);
-        else if (value <= 100) setHp(hp => hp+0.5);
-      } else {
-        if (value >= 75) setHp(hp => hp-0.5);
-        else if (value >= 50)  setHp(hp => hp-1);
-        else if (value >= 10)  setHp(hp => hp-2);
-        else if (value >= 0)       setHp(hp => hp-3);
+    setHp(60);
+    setPower(-80);
+
+    for(let i=value; i>0; i--) {
+      // HP
+      for(let threshold of Object.keys(hpScale)) {
+        if(i>Number(threshold)) {
+          setHp(hp => hp + hpScale[threshold]);
+        }
+      }
+      // Power Bonus 
+      for(let threshold of Object.keys(powerScale)) {
+        if(i>Number(threshold)) {
+          setPower(power => power + powerScale[threshold]);
+        }
       }
     }
   }
 
+  
+
+
   return (
     <>
-      <div className='stat-wrap'>
-        <div className='stat-name'>Strength</div>
-        <input 
-          className='stat-number' 
-          type='number' 
-          min={0} max={100} maxLength={2} defaultValue={str}
-          onChange={e => strChange(Number(e.target.value))}/>
+
+      <div className='stats'>
+
+        <section className='stat-wrap'>
+          <span className='stat-name'>Strength</span>
+          <input 
+            className='stat-number' 
+            type='number' 
+            min={0} max={100} maxLength="2" defaultValue={str}
+            onChange={e => {
+                strChange(Number(e.target.value));
+                e.target.value.length > 2 ? e.target.value = 100 : 0;
+              }
+            }
+            />
+        </section>
+
+        <section className='stat-wrap'>
+          <span className='stat-name'>Health</span>
+          <span className='stat-number'>{hp}</span>
+        </section>
+
+        <hr/>
+
+        <section className='stat-wrap'>
+          <span className='stat-name'>Physical power bonus</span>
+          <span className='stat-number bonus'>{power}%</span>
+        </section>
+
       </div>
-      <div className='stat-wrap'>
-        <div className='stat-name'>Health</div>
-        <div className='stat-number'>{hp}</div>
-      </div>
+
     </>
   )
 }
