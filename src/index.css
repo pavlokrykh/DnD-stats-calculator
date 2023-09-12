@@ -1,0 +1,10 @@
+@font-face {
+  font-family: KimDaeGeon;
+  src: url('../src/assets/font/KimDaeGeon.ttf');
+}
+
+body {
+  margin: 0;
+  font-family: kimDaeGeon;
+  font-size: 18px;
+}
