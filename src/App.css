@@ -13,10 +13,18 @@
   font-family: KimDaeGeon;
 }
 
-.bonus {
+.green {
   color: limegreen;
 }
 
 .red {
   color: red;
+}
+
+.black {
+  color: black;
+}
+
+.gray {
+  color: gray;
 }
